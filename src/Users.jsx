@@ -1,3 +1,4 @@
+// client/src/Users.jsx (No changes needed)
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios'; // Don't forget to install axios if you haven't: npm install axios
@@ -12,7 +13,7 @@ export default function Users() {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:3001/users'); // Adjust port if different
+      const response = await axios.get('http://localhost:3001/users'); // This is correct for port 3001
       setUsers(response.data);
       setError(null); // Clear any previous errors
     } catch (err) {
@@ -101,7 +102,7 @@ export default function Users() {
                           name="name"
                           value={editFormData.name}
                           onChange={handleEditFormChange}
-                          className="form-control"
+                          className="form-control "
                         />
                       ) : (
                         user.name

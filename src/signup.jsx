@@ -61,18 +61,18 @@ export default function Signup() {
         <form id="form" className='border shadow-lg px-3 ' onSubmit={handleSubmit}>
           <div className="d-flex flex-column flex-lg-row flex-md-row w-100 justify-content-center align-items-center">
             <label htmlFor="name" className='w-50 ms-5'> Name:</label>
-            <input type="text" onChange={handleInput} placeholder="Name" name="name" id="name" />
+            <input type="text" onChange={handleInput} placeholder="Name"  name="name" id="name" />
             {errors.name && <p className='text-danger m-2'>{errors.name}</p>}
           </div>
           {/* Removed Last Name input field */}
           <div className="d-flex flex-column flex-md-row flex-lg-row w-100 justify-content-center align-items-center">
             <label htmlFor="email" className='w-50 ms-5'> Email:</label>
-            <input type="text" onChange={handleInput} placeholder="Email" name="email" id="email" />
+            <input type="text" onChange={handleInput} placeholder="Email"   name="email"  id="email" />
             {errors.email && <p className='text-danger m-2'>{errors.email}</p>}
           </div>
           <div className="d-flex flex-column flex-md-row flex-lg-row justify-content-center w-100 align-items-center">
             <label htmlFor="password" className='w-50 ms-5'> Password:</label>
-            <input type="password" onChange={handleInput} placeholder="Password" name="password" id="password" /> {/* Changed type to password */}
+            <input type="password" onChange={handleInput} placeholder="Password"  name="password" id="password" /> {/* Changed type to password */}
             {errors.password && <p className='text-danger mt-2'>{errors.password}</p>}
           </div>
 
@@ -84,6 +84,7 @@ export default function Signup() {
           
           <Link to="/flog" className='text-decoration-none'>Login</Link>
         </form>
+        
       </div>
     </div>
   )

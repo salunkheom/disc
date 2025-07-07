@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes, Link } from "react-router-dom"; // <-- FI
 // Core authentication pages
 import Login from "./Login";
 import Signup from "./signup";
-
+    import 'bootstrap/dist/css/bootstrap.css';
 // Pages for logged-in users
 import Dashboard from "./Dashboard.jsx";
 import Prof from "./prof";           // This is your Profile page
@@ -28,7 +28,7 @@ export default function App() {
         {/* You'd later add logic to protect these routes,
             e.g., by checking for an authentication token */}
         <Route path="/dashboard" element={<Dashboard />} /> {/* <-- FIX: Changed to lowercase /dashboard */}
-        <Route path="/profile" element={<Prof />} />
+        <Route path="/prof" element={<Prof />} />
         <Route path="/users" element={<Users />} />
         <Route path="/report" element={<Report />} />
         <Route path="/settings" element={<Settings />} />

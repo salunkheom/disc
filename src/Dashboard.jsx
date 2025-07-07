@@ -17,7 +17,7 @@ export default function Dashboard() {
         <h2>Welcome to Your Dashboard!</h2>
         <p>Explore your application features:</p>
         <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-4">
-          <Link to="/profile" className="btn btn-primary">
+          <Link to="/prof" className="btn btn-primary">
             My Profile
           </Link>
           <Link to="/users" className="btn btn-primary">
