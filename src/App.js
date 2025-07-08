@@ -8,7 +8,6 @@ import Signup from "./signup";
 import Dashboard from "./Dashboard.jsx";
 import Prof from "./prof";           // This is your Profile page
 import Users from "./Users";         // New: Users page
-import Report from "./Report";       // New: Report page
 import Settings from "./Settings";   // New: Settings page
 
 // Styles
@@ -21,7 +20,7 @@ export default function App() {
       <Routes>
         {/* Public Routes (accessible without login) */}
         <Route path="/" element={<Login />} />
-        <Route path="/flog" element={<Login />} />
+        <Route path="/disc" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
         {/* Protected Routes (typically accessible after login) */}
@@ -30,7 +29,6 @@ export default function App() {
         <Route path="/dashboard" element={<Dashboard />} /> {/* <-- FIX: Changed to lowercase /dashboard */}
         <Route path="/prof" element={<Prof />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/report" element={<Report />} />
         <Route path="/settings" element={<Settings />} />
 
         {/* 404 Not Found Route - Always keep this as the last route */}
@@ -41,7 +39,7 @@ export default function App() {
               <p>The page you are looking for does not exist.</p>
               <Link to="/dashboard" className="btn btn-primary mt-3">Go to Dashboard</Link>
               <br/>
-              <Link to="/flog" className="btn btn-link mt-2">Login</Link>
+              <Link to="/disc" className="btn btn-link mt-2">Login</Link>
             </div>
           </div>
         } />

@@ -82,7 +82,7 @@ export default function Signup() {
 
         
           
-          <Link to="/flog" className='text-decoration-none'>Login</Link>
+          <Link to="/disc" className='text-decoration-none'>Login</Link>
         </form>
         
       </div>

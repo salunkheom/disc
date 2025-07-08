@@ -23,9 +23,7 @@ export default function Dashboard() {
           <Link to="/users" className="btn btn-primary">
             Manage Users
           </Link>
-          <Link to="/report" className="btn btn-primary">
-            View Reports
-          </Link>
+       
           <Link to="/settings" className="btn btn-primary">
             App Settings
           </Link>
