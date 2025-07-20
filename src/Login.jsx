@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Loginvalidation from './Loginvalidation';
 import axios from 'axios';
 
-export default function Login() { // Keep the component name as Login
+export default function Login() {
     const [values, setValues] = useState({
         username:'',
         email: '',
@@ -13,16 +13,15 @@ export default function Login() { // Keep the component name as Login
 
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-    const [message, setMessage] = useState(''); // State for custom message box
+    const [message, setMessage] = useState('');
 
     const handleInput = (event) => {
         setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
-        // Clear specific error message as user types
         setErrors(prev => ({ ...prev, [event.target.name]: '' }));
-        setMessage(''); // Clear API message on new input
+        setMessage('');
     }
 
-    const handleSubmit = async (event) => { // Make handleSubmit async for await
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         const validationErrors = Loginvalidation(values);
@@ -30,18 +29,17 @@ export default function Login() { // Keep the component name as Login
 
         if (Object.values(validationErrors).every(error => error === '')) {
             try {
-                const response = await axios.post('http://localhost:3001/login', values);
+                // *** CRITICAL CHANGE HERE: Use relative path for Vercel Serverless Function ***
+                const response = await axios.post('/api/login', values); // CHANGED from 'http://localhost:3001/login'
 
                 if (response.data.success) {
                     console.log('User logged in successfully!', response.data.message);
                     setMessage('Login successful! Redirecting to profile...');
 
-                    // --- IMPORTANT: Store user data in localStorage ---
-                    // This data will then be retrieved by the Prof component
                     localStorage.setItem('userEmail', values.email);
-                    localStorage.setItem('userRole', response.data.role || 'User'); // Assume backend can send a role
- localStorage.setItem('userNameame', response.data.name || 'User'); // Store the user's name
-                    // Redirect to the profile page after a short delay for message visibility
+                    localStorage.setItem('userRole', response.data.role || 'User');
+                    localStorage.setItem('userName', response.data.name || 'User'); // FIXED TYPO: userNameame -> userName
+
                     setTimeout(() => navigate('/prof'), 1500);
 
                 } else {
@@ -55,7 +53,7 @@ export default function Login() { // Keep the component name as Login
                     console.error('Backend error status:', error.response.status);
                     setMessage(error.response.data.error || "An unexpected error occurred during login.");
                 } else if (error.request) {
-                    setMessage("No response from server. Please ensure the backend is running.");
+                    setMessage("No response from server. Please ensure the backend is running and accessible."); // More helpful message
                 } else {
                     setMessage("Error setting up login request.");
                 }
@@ -73,7 +71,7 @@ export default function Login() { // Keep the component name as Login
                     <div className="d-flex flex-column flex-md-row flex-lg-row w-100 justify-content-center align-items-center">
                         <label htmlFor="username" className='text-gray-700 text-sm font-medium mb-1'>Username:</label>
                         <input
-                            type="text" // Changed type to email for better browser validation
+                            type="text"
                             onChange={handleInput}
                             placeholder="username"
                             value={values.username}
@@ -84,9 +82,9 @@ export default function Login() { // Keep the component name as Login
                     </div>
                     {errors.username  && <p className='text-red-500 text-xs mt-1'>{errors.username}</p>}
                     <div className="d-flex flex-column flex-md-row flex-lg-row w-100 justify-content-center align-items-center">
-                        <label htmlFor="username" className='text-gray-700 text-sm font-medium mb-1'>Email:</label>
+                        <label htmlFor="email" className='text-gray-700 text-sm font-medium mb-1'>Email:</label>
                         <input
-                            type="email" // Changed type to email for better browser validation
+                            type="email"
                             onChange={handleInput}
                             placeholder="Email"
                             value={values.email}
@@ -100,7 +98,7 @@ export default function Login() { // Keep the component name as Login
                     <div className="d-flex flex-column flex-md-row flex-lg-row w-100 justify-content-center align-items-center">
                         <label htmlFor="password" className='w-50 ms-5 text-gray-700 text-sm font-medium mb-1'>Password:</label>
                         <input
-                            type="password" // Changed type to password for security
+                            type="password"
                             onChange={handleInput}
                             placeholder="Password"
                             value={values.password}
@@ -128,15 +126,12 @@ export default function Login() { // Keep the component name as Login
                     </Link>
                 </form>
 
-                {/* Custom Message Box for API responses */}
                 {message && (
                     <div className={`mt-4 p-3 rounded-md border text-center ${message.includes('successful') ? 'bg-green-100 text-green-800 border-green-300' : 'bg-red-100 text-red-800 border-red-300'}`}>
                         {message}
                     </div>
                 )}
             </div>
-            {/* THIS IS THE LINE THAT SHOULD BE REMOVED */}
-            {/* <Prof info={values.email} /> */}
         </div>
     );
 }
