@@ -24,11 +24,11 @@ export default function Signup() {
     setErrors(validationErrors);
 
     if (Object.values(validationErrors).every(error => error === '')) {
-      // *** CRITICAL CHANGE HERE: Use relative path for Vercel Serverless Function ***
+      // CRITICAL CHANGE: Use relative path for Vercel Serverless Function
       axios.post('/api/signup', values) // CHANGED from 'http://localhost:3001/signup'
         .then(response => {
           if (response.data.success) {
-            // *** FIXED: navigate to '/disc' (your login page) as per App.js routes ***
+            // FIXED: navigate to '/disc' (your login page) as per App.js routes
             navigate('/disc'); // CHANGED from '/flog'
             console.log('User registered successfully!', response.data.message);
           } else {
@@ -41,7 +41,11 @@ export default function Signup() {
           if (error.response) {
             console.error('Backend error data:', error.response.data);
             console.error('Backend error status:', error.response.status);
-            alert(error.response.data.error || "An unexpected error occurred during signup.");
+            // Refined error handling to extract message string
+            const errorMessage = error.response.data && typeof error.response.data.error === 'object' && error.response.data.error.message
+                                ? error.response.data.error.message
+                                : (error.response.data.error || "An unexpected error occurred during signup.");
+            alert(errorMessage);
           } else {
             alert("Network error or server unreachable. Please try again later.");
           }

@@ -29,7 +29,7 @@ export default function Login() {
 
         if (Object.values(validationErrors).every(error => error === '')) {
             try {
-                // *** CRITICAL CHANGE HERE: Use relative path for Vercel Serverless Function ***
+                // CRITICAL CHANGE: Use relative path for Vercel Serverless Function
                 const response = await axios.post('/api/login', values); // CHANGED from 'http://localhost:3001/login'
 
                 if (response.data.success) {
@@ -44,6 +44,7 @@ export default function Login() {
 
                 } else {
                     console.error('Login failed from backend:', response.data.error);
+                    // Ensure message is always a string
                     setMessage(response.data.error || "Login failed. Please check your credentials.");
                 }
             } catch (error) {
@@ -51,9 +52,13 @@ export default function Login() {
                 if (error.response) {
                     console.error('Backend error data:', error.response.data);
                     console.error('Backend error status:', error.response.status);
-                    setMessage(error.response.data.error || "An unexpected error occurred during login.");
+                    // Refined error handling to extract message string
+                    const errorMessage = error.response.data && typeof error.response.data.error === 'object' && error.response.data.error.message
+                                        ? error.response.data.error.message
+                                        : (error.response.data.error || "An unexpected error occurred during login.");
+                    setMessage(errorMessage);
                 } else if (error.request) {
-                    setMessage("No response from server. Please ensure the backend is running and accessible."); // More helpful message
+                    setMessage("No response from server. Please ensure the backend is running and accessible.");
                 } else {
                     setMessage("Error setting up login request.");
                 }
