@@ -61,6 +61,9 @@ export default function Prof() {
           </>
         ) : (
           <p className="fs-5 text-secondary">Loading profile...</p>
+      <Link to="/dashboard" className="btn btn-secondary btn-lg shadow-sm">
+              Back to Dashboard
+            </Link>
         )}
       </div>
     </div>
