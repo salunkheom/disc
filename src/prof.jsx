@@ -19,7 +19,7 @@ export default function Prof() {
       setUserName(storedName || 'Guest'); // Default to 'Guest' if name not found
       setUserRole(storedRole || 'User'); // Default to 'User' if role not found
     } else {
-      navigate('/flog'); // Redirect if not logged in
+      navigate('/disc'); // Redirect if not logged in
     }
   }, [navigate]);
 
