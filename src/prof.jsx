@@ -28,7 +28,7 @@ export default function Prof() {
     localStorage.removeItem('userName');
     localStorage.removeItem('userLastName'); // Clear last name too if stored
     localStorage.removeItem('userRole'); // Clear role
-    navigate('/flog');
+    navigate('/prof');
   };
 
   return (
