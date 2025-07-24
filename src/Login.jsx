@@ -125,7 +125,9 @@ export default function Login() {
                         <input type="checkbox" id="terms" className="form-checkbox h-4 w-4 text-blue-600 rounded" />
                         <label htmlFor="terms">Terms & Conditions</label>
                     </div>
-
+<div className="text-center mt-5">
+          <Link to="/dashboard" className="btn btn-secondary">Back to Dashboard</Link>
+        </div>
                     <Link to="/signup" className='block text-center text-blue-600 hover:underline mt-4'>
                         Create Account
                     </Link>
