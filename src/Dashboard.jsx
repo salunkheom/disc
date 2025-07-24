@@ -8,7 +8,7 @@ export default function Dashboard() {
     // Clear any user session data (e.g., from localStorage)
     localStorage.removeItem('userEmail'); // Example: if you stored email
     console.log('User logged out.');
-    navigate('/flog'); // Redirect to login page
+    navigate('/disc'); // Redirect to login page
   };
 
   return (
